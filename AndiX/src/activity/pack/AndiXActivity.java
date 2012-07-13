@@ -33,7 +33,7 @@ public class AndiXActivity extends Activity {
 //		config.put("StrictHostKeyChecking", "no");
 //		JSch jsch = new JSch();
 //		Session session = jsch.getSession("winx", "192.168.1.88", 22);
-//		session.setPassword("kp45se!");
+//		session.setPassword("");
 //		session.setConfig(config);
 //		session.connect();
 //
