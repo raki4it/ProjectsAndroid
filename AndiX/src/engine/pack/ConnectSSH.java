@@ -41,7 +41,7 @@ public class ConnectSSH {
 
 		JSch jsch = new JSch();
 		session = jsch.getSession(Username, Host, Port);
-		session.setPassword("a");
+		session.setPassword("");
 		session.setConfig(config);
 		session.connect();
 	}

@@ -1,77 +1,57 @@
 package activity.pack;
 
+import android.app.Activity;
+import android.os.Bundle;
+import android.view.View;
+
+import com.jcraft.jsch.JSchException;
 import com.main.R;
 
 import engine.pack.ConnectSSH;
-
-import android.app.Activity;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
 
 public class AndiXActivity extends Activity {
 	/** Called when the activity is first created. */
 	public final static String EXTRA_MESSAGE = "com.example.myapp.MESSAGE";
 	String message;
+	private ConnectSSH ssh;
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState)  {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		ssh = new ConnectSSH("192.168.1.88", "winx", 22);
+		try {
+			ssh.connect();
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
-	/** Called when the user selects the Send button 
+	/** Called when the user selects the Send button METRO UI lub identyczny z GNOMA 
 	 * @throws Exception */
-	public void sendMessage(View view) throws Exception {
+	public void play(View view) throws Exception {
 		
-		ConnectSSH ssh = new ConnectSSH("192.168.1.88", "winx", 22);
-		ssh.connect();
 		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --play");
-		//ssh.closeConnect();
-//		Properties config = new Properties();
-//		config.put("StrictHostKeyChecking", "no");
-//		JSch jsch = new JSch();
-//		Session session = jsch.getSession("winx", "192.168.1.88", 22);
-//		session.setPassword("");
-//		session.setConfig(config);
-//		session.connect();
-//
-//		String command = "env DISPLAY=:0.0 rhythmbox-client --no-start --play";
-//		Channel channel = session.openChannel("exec");
-//		((ChannelExec) channel).setCommand(command);
-//		channel.setInputStream(null);
-//		((ChannelExec) channel).setErrStream(System.err);
-//		InputStream in = channel.getInputStream();
-//
-//		channel.connect();
-//
-//	/*	byte[] tmp = new byte[1024];
-//		while (true) {
-//			while (in.available() > 0) {
-//				int i = in.read(tmp, 0, 1024);
-//				if (i < 0)
-//					break;
-//				System.out.print(new String(tmp, 0, i));
-//			}
-//			if (channel.isClosed()) {
-//				System.out.println("exit-status: " + channel.getExitStatus());
-//				break;
-//			}
-//			try {
-//				Thread.sleep(1000);
-//			} catch (Exception ee) {
-//			}
-//		}*/
-//
-//		channel.disconnect();
-//		session.disconnect();
-
 		// Do something in response to button
-		Intent intent = new Intent(this, DisplayMessageActivity.class);
+		// Intent intent = new Intent(this, DisplayMessageActivity.class);
 		// EditText editText = (EditText) findViewById(R.string.hello);
 		// editText.getText().toString();
-		intent.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent);
+		// intent.putExtra(EXTRA_MESSAGE, message);
+		// startActivity(intent);
 	}
+	
+	public void nextSong(View view) throws Exception{
+		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --next");
+	}
+	
+	public void previousSong(View view) throws Exception{
+		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --previous");
+	}
+	
+	public void pause(View view) throws Exception{
+		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --pause");
+	}
+	
 }
