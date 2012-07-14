@@ -9,10 +9,50 @@
         android:layout_height="wrap_content"
         android:text="@string/hello" />
 
-    <Button
-        android:layout_width="108dp"
-        android:layout_height="wrap_content"
-        android:onClick="sendMessage"
-        android:text="@string/button_send" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.91" >
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="108dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="111dp"
+            android:onClick="play"
+            android:text="@string/button_play" />
+
+        <Button
+            android:id="@+id/button1"
+            style="buttonStyle"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button2"
+            android:layout_toRightOf="@+id/button2"
+            android:onClick="nextSong"
+            android:text="@string/button_next" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/button2"
+            android:layout_toLeftOf="@+id/button2"
+            android:onClick="previousSong"
+            android:text="@string/button_previous" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/button2"
+            android:layout_below="@+id/button3"
+            android:layout_toRightOf="@+id/button3"
+            android:onClick="pause"
+            android:text="@string/button_pause" />
+
+    </RelativeLayout>
 
 </LinearLayout>
