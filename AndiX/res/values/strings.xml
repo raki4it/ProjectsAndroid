@@ -7,5 +7,9 @@
     <string name="button_next">Next</string>
     <string name="button_previous">Previous</string>
     <string name="button_pause">Pause</string>
-
+    <string name="seek_value">Pause</string>
+    <string name="on">ON</string>
+    <string name="off">OFF</string>
+    <string name="set_volume">Set volume</string>
+    
 </resources>

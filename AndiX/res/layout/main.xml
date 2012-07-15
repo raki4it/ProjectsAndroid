@@ -12,46 +12,86 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="0.91" >
+        android:layout_margin="15dp"
+        android:layout_weight="0.76" >
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="108dp"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="111dp"
-            android:onClick="play"
-            android:text="@string/button_play" />
+            android:background="@drawable/play"
+            android:focusableInTouchMode="true"
+            android:onClick="play" />
 
         <Button
             android:id="@+id/button1"
             style="buttonStyle"
-            android:layout_width="fill_parent"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button2"
             android:layout_toRightOf="@+id/button2"
-            android:onClick="nextSong"
-            android:text="@string/button_next" />
+            android:background="@drawable/forward"
+            android:onClick="nextSong" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="fill_parent"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/button2"
             android:layout_toLeftOf="@+id/button2"
-            android:onClick="previousSong"
-            android:text="@string/button_previous" />
+            android:background="@drawable/back"
+            android:onClick="previousSong" />
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="wrap_content"
+            android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:layout_alignRight="@+id/button2"
             android:layout_below="@+id/button3"
             android:layout_toRightOf="@+id/button3"
-            android:onClick="pause"
-            android:text="@string/button_pause" />
+            android:background="@drawable/pause"
+            android:onClick="pause" />
+
+        <SeekBar
+            android:id="@+id/seekBar1"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/button1"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="46dp"
+            android:max="10"
+            android:maxHeight="10dip"
+            android:minHeight="10dip"
+            android:contentDescription="@string/set_volume"/>
+
+        <ImageView
+            android:id="@+id/imageView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/seekBar1"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/seekBar1"
+            android:layout_toLeftOf="@+id/seekBar1"
+            android:src="@drawable/off" 
+            android:layout_marginLeft="10dp"
+            android:contentDescription="@string/on"/>
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/seekBar1"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/seekBar1"
+            android:layout_toRightOf="@+id/seekBar1"
+            android:src="@drawable/on"
+            android:layout_marginRight="10dp"
+            android:contentDescription="@string/off"/>
 
     </RelativeLayout>
 
