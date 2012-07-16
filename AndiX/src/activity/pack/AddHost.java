@@ -68,7 +68,7 @@ public class AddHost extends Activity {
 			}
 		}
 		
-		Intent intent = new Intent(this, AndiXActivity.class);
+		Intent intent = new Intent(this, HostsMain.class);
 		startActivity(intent);
 
 	}

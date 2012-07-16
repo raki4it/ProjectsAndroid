@@ -18,7 +18,13 @@
     <string name="username">User : </string>
     <string name="password">Password : </string>
     <string name="save_button">Save</string>
-    <string name="save_cancel">Cancel</string>
+    <string name="save_cancel">Cancel</string>    
+    <string name="hostsList">List of hosts</string>
+    
+    <string name="hostsListAddress"></string>
+    <string name="hostsListName"></string>
+    <string name="hostsListUser"></string>
+
     
     
 </resources>

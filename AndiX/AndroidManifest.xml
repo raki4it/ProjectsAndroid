@@ -15,8 +15,9 @@
         android:label="@string/app_name" >
         <activity android:name="activity.pack.AddHost" />
         <activity android:name="activity.pack.Settings" />
+        <activity android:name="activity.pack.AndiXActivity" />
         <activity
-            android:name="activity.pack.AndiXActivity"
+            android:name="activity.pack.HostsMain"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
