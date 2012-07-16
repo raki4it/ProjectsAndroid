@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context="activity.pack.AndiXActivity" >
 
     <TextView
         android:layout_width="fill_parent"
@@ -64,10 +66,10 @@
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="46dp"
+            android:contentDescription="@string/set_volume"
             android:max="10"
             android:maxHeight="10dip"
-            android:minHeight="10dip"
-            android:contentDescription="@string/set_volume"/>
+            android:minHeight="10dip" />
 
         <ImageView
             android:id="@+id/imageView1"
@@ -76,10 +78,10 @@
             android:layout_alignBottom="@+id/seekBar1"
             android:layout_alignParentLeft="true"
             android:layout_alignTop="@+id/seekBar1"
+            android:layout_marginRight="15dp"
             android:layout_toLeftOf="@+id/seekBar1"
-            android:src="@drawable/off" 
-            android:layout_marginLeft="10dp"
-            android:contentDescription="@string/on"/>
+            android:contentDescription="@string/on"
+            android:src="@drawable/off" />
 
         <ImageView
             android:id="@+id/imageView2"
@@ -88,10 +90,10 @@
             android:layout_alignBottom="@+id/seekBar1"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/seekBar1"
+            android:layout_marginLeft="15dp"
             android:layout_toRightOf="@+id/seekBar1"
-            android:src="@drawable/on"
-            android:layout_marginRight="10dp"
-            android:contentDescription="@string/off"/>
+            android:contentDescription="@string/off"
+            android:src="@drawable/on" />
 
     </RelativeLayout>
 

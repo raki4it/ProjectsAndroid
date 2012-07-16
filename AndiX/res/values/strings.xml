@@ -11,5 +11,14 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="set_volume">Set volume</string>
+    <string name="add_host">Add host</string>
+    <string name="settings">Settings</string>
+    <string name="host_name">Name : </string>
+    <string name="host_ip">Host : </string>
+    <string name="username">User : </string>
+    <string name="password">Password : </string>
+    <string name="save_button">Save</string>
+    <string name="save_cancel">Cancel</string>
+    
     
 </resources>
