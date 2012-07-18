@@ -43,8 +43,7 @@ public class AddHost extends Activity {
 		// setContentView(textView);
 	}
 
-	public void save(View view) {
-		
+	private boolean validateDataForm() {
 		if (hostName.getText().toString().length() == 0
 				|| username.getText().toString().length() == 0
 				|| password.getText().toString().length() == 0
@@ -52,48 +51,63 @@ public class AddHost extends Activity {
 
 			if (hostName.getText().toString().length() == 0)
 				hostName.setError(getText(R.string.reqName));
-			
+
 			if (username.getText().toString().length() == 0)
 				username.setError(getText(R.string.reqUser));
-			
+
 			if (password.getText().toString().length() == 0)
 				password.setError(getText(R.string.reqPass));
-			
+
 			if (hostIp.getText().toString().length() == 0)
 				hostIp.setError(getText(R.string.reqIp));
+			return false;
 		}
+		return true;
+	}
 
-		else {
-			HostAccount host = new HostAccount(hostName.getText().toString(),
-					hostIp.getText().toString(), username.getText().toString(),
-					password.getText().toString());
-			FileOutputStream fos = null;
-			ObjectOutputStream oos = null;
+	private void serializeDataToBin() {
+		File dir = new File(Environment.getExternalStorageDirectory().getPath()
+				+ "/andix/");
+		
+		if (!dir.exists()) {
+			dir.mkdir();
+		}
+		
+		HostAccount host = new HostAccount(hostName.getText().toString(),
+				hostIp.getText().toString(), username.getText().toString(),
+				password.getText().toString());
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+
+		try {
+			fos = new FileOutputStream(dir.getPath()+"/save.bin");
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(host);
+
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
 
 			try {
-				fos = new FileOutputStream(new File(Environment
-						.getExternalStorageDirectory().getPath() + "/save.bin"));
-				oos = new ObjectOutputStream(fos);
-				oos.writeObject(host);
-
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
+				if (oos != null)
+					oos.close();
 			} catch (IOException e) {
-				e.printStackTrace();
-			} finally {
-
-				try {
-					if (oos != null)
-						oos.close();
-				} catch (IOException e) {
-				}
-				try {
-					if (fos != null)
-						fos.close();
-				} catch (IOException e) {
-				}
 			}
+			try {
+				if (fos != null)
+					fos.close();
+			} catch (IOException e) {
+			}
+		}
+		
+	}
 
+	public void save(View view) {
+
+		if (validateDataForm()) {
+			serializeDataToBin();
 			startActivity(intent);
 		}
 

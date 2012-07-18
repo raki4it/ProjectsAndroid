@@ -1,100 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/MainScrollView"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    tools:context="activity.pack.AddHost" >
+    android:layout_height="fill_parent" >
 
-    <TextView
-        android:id="@+id/lbName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/host_name"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/host_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ems="10"
-        android:inputType="text" >
-
-        <requestFocus />
-    </EditText>
-
-    <TextView
-        android:id="@+id/lbUser"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/username"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ems="10"
-        android:inputType="text" />
-
-    <TextView
-        android:id="@+id/lbPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ems="10"
-        android:inputType="textPassword" />
-
-    <TextView
-        android:id="@+id/lbHost"
+    <TableLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/host_ip"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        tools:context="activity.pack.AddHost" >
 
-    <EditText
-        android:id="@+id/host_ip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ems="10"
-        android:inputType="text" />
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" >
-
-        <Button
-            android:id="@+id/SaveHostButton"
-            android:layout_width="155dp"
-            android:layout_height="50dp"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+        <TextView
+            android:id="@+id/lbName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:onClick="save"
-            android:text="@string/save_button" />
+            android:text="@string/host_name"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
-        <Button
-            android:id="@+id/CancelHostButton"
-            android:layout_width="155dp"
-            android:layout_height="50dp"
-            android:layout_alignParentTop="true"
+        <EditText
+            android:id="@+id/host_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:layout_toLeftOf="@+id/SaveHostButton"
-            android:text="@string/save_cancel" />
+            android:ems="10"
+            android:hint="@string/hintName"
+            android:inputType="text" >
 
-    </RelativeLayout>
+            <requestFocus />
+        </EditText>
 
-</TableLayout>
+        <TextView
+            android:id="@+id/lbUser"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/username"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:hint="@string/hintUser"
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/lbPassword"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/password"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:hint="@string/hintPass"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:id="@+id/lbHost"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/host_ip"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/host_ip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="10"
+            android:hint="@string/hintIp"
+            android:inputType="text" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" >
+
+            <Button
+                android:id="@+id/SaveHostButton"
+                android:layout_width="155dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dp"
+                android:onClick="save"
+                android:text="@string/save_button" />
+
+            <Button
+                android:id="@+id/CancelHostButton"
+                android:layout_width="155dp"
+                android:layout_height="50dp"
+                android:layout_alignParentTop="true"
+                android:layout_margin="5dp"
+                android:layout_toLeftOf="@+id/SaveHostButton"
+                android:onClick="cancel"
+                android:text="@string/save_cancel" />
+        </RelativeLayout>
+    </TableLayout>
+
+</ScrollView>

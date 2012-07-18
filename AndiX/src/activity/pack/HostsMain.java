@@ -27,20 +27,29 @@ import engine.pack.HostAccount;
  * 
  */
 public class HostsMain extends Activity {
+	private TextView hostsListName;
+	private TextView hostsListAddress;
+	private TextView hostsListUser;
+	
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hosts);
 
-		TextView hostsListName = (TextView) findViewById(R.id.lbhostName);
-		TextView hostsListAddress = (TextView) findViewById(R.id.lbhostAddress);
-		TextView hostsListUser = (TextView) findViewById(R.id.lbhostUser);
+		hostsListName = (TextView) findViewById(R.id.lbhostName);
+		hostsListAddress = (TextView) findViewById(R.id.lbhostAddress);
+		hostsListUser = (TextView) findViewById(R.id.lbhostUser);
+		
+		loadDataFromBin();
 
+	}
+
+	private void loadDataFromBin() {
 		HostAccount b = null;
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
 		try {
 			fis = new FileInputStream(new File(Environment
-					.getExternalStorageDirectory().getPath() + "/save.bin"));
+					.getExternalStorageDirectory().getPath() + "/andix/"+"save.bin"));
 			ois = new ObjectInputStream(fis);
 
 			b = (HostAccount) ois.readObject();
