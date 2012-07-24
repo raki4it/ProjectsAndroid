@@ -29,13 +29,7 @@ public class AddHost extends Activity {
 		username = (EditText) findViewById(R.id.username);
 		password = (EditText) findViewById(R.id.password);
 		intent = new Intent(this, HostsMain.class);
-		// Intent intent = getIntent();
-		// String message = intent.getStringExtra(AndiXActivity.EXTRA_MESSAGE);
-		// TextView textView = new TextView(this);
-		// textView.setTextSize(40);
-		// textView.setText(message);
-		//
-		// setContentView(textView);
+		
 	}
 
 	private boolean validateDataForm() {

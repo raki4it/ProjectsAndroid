@@ -15,9 +15,6 @@ import com.main.R;
 import engine.pack.ConnectSSH;
 
 public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
-	/** Called when the activity is first created. */
-	public final static String EXTRA_MESSAGE = "com.example.myapp.MESSAGE";
-	String message;
 	private ConnectSSH ssh;
 	private SeekBar mSeekBar;
 
@@ -33,6 +30,14 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		NetworkInfo mWifi = connManager
 				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
+		//TODO send object
+//		HostAccount hostToConnect = getIntent().getExtras().getParcelable("hostToConnect");
+//		if(hostToConnect!=null)
+//			System.out.println(hostToConnect.getHostName());
+		
+		String message = getIntent().getStringExtra(HostsMain.HOST_NAME);
+		System.out.println(message);
+		
 		if (mWifi.isConnected()) {
 			new Thread(new Runnable() {
 				public void run() {
@@ -57,18 +62,8 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 
 	}
 
-	/**
-	 * Called when the user selects the Send button METRO UI lub identyczny z
-	 * GNOMA
-	 */
 	public void play(View view) {
 		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --play");
-		// Do something in response to button
-		// Intent intent = new Intent(this, DisplayMessageActivity.class);
-		// EditText editText = (EditText) findViewById(R.string.hello);
-		// editText.getText().toString();
-		// intent.putExtra(EXTRA_MESSAGE, message);
-		// startActivity(intent);
 	}
 
 	public void nextSong(View view) {

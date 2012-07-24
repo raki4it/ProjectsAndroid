@@ -13,10 +13,10 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.main.R;
 
+import engine.pack.HostAccount;
 import engine.pack.HostsLoadAndSave;
 
 /**
@@ -25,15 +25,18 @@ import engine.pack.HostsLoadAndSave;
  */
 
 public class HostsMain extends Activity {
-	
-
+	public final static String HOST_NAME = "hostToConnect";
+	private ListView listView;
+	private Intent intentToMain;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hosts);
 
 		HostsLoadAndSave hostFiles = new HostsLoadAndSave();
-		ListView listView = (ListView) findViewById(R.id.listHosts);
+		intentToMain = new Intent(this, AndiXActivity.class);
+
+		listView = (ListView) findViewById(R.id.listHosts);
 		HostListAdapter adapter = new HostListAdapter(this,
 				R.layout.listview_item_row, hostFiles.loadData());
 
@@ -47,9 +50,16 @@ public class HostsMain extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				Toast.makeText(getApplicationContext(),
-						"Click ListItem Number " + position, Toast.LENGTH_LONG)
-						.show();
+				HostAccount h = (HostAccount) listView
+						.getItemAtPosition(position);
+
+				
+				intentToMain.putExtra(HOST_NAME, h.getHostName());
+				startActivity(intentToMain);
+				// TODO send ssh connetion to main activity in h is all data
+//				intentToMain.putExtra("hostToConnect", h);
+//				Toast.makeText(getApplicationContext(), h.getHostName(),
+//						Toast.LENGTH_LONG).show();
 			}
 		});
 
