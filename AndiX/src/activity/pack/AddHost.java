@@ -80,7 +80,7 @@ public class AddHost extends Activity {
 		ObjectOutputStream oos = null;
 
 		try {
-			fos = new FileOutputStream(dir.getPath()+"/save.bin");
+			fos = new FileOutputStream(dir.getPath()+"/"+hostName.getText().toString());
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(host);
 

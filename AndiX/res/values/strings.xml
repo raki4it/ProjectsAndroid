@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Main Activity -->
     <string name="hello">Hello World, AndiXActivity!</string>
     <string name="app_name">AndiX</string>
     <string name="button_play">Play</string>
@@ -11,23 +12,25 @@
     <string name="on">ON</string>
     <string name="off">OFF</string>
     <string name="set_volume">Set volume</string>
+    
+    <!-- Menu on HostMainActivity -->
     <string name="add_host">Add host</string>
     <string name="exit">Exit</string>
+    
+    <!-- AddHostActivity -->
     <string name="host_name">Name : </string>
     <string name="host_ip">Host : </string>
     <string name="username">User : </string>
     <string name="password">Password : </string>
     <string name="save_button">Save</string>
     <string name="save_cancel">Cancel</string>    
-    <string name="hostsList">List of hosts :</string>    
-    <string name="hostsListAddress"></string>
-    <string name="hostsListName"></string>
-    <string name="hostsListUser"></string>    
+    <string name="hostsList">List of hosts :</string>
+        
     <string name="hintName">My Host</string>
     <string name="hintUser">Username</string>
     <string name="hintIp">127.0.0.1</string>
     <string name="hintPass">SekretKey</string>
-    
+        
     <string name="reqName">Name host is rquired</string>
     <string name="reqUser">Username is rquired</string>
     <string name="reqIp">IP is rquired</string>

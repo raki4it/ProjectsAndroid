@@ -19,9 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.main.R;
@@ -33,24 +31,21 @@ import engine.pack.HostAccount;
  * 
  */
 public class HostsMain extends Activity  {
-	private TextView hostsListName;
-	private TextView hostsListAddress;
-	private TextView hostsListUser;
 
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hosts);
 
-		ListView listView = (ListView) findViewById(R.id.listHosts);
-		String[] values = new String[] { "Android", "iPhone", "WindowsMobile",
-				"Blackberry", "WebOS", "Ubuntu", "Windows7", "Max OS X",
-				"Linux", "OS/2" };
-
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-				android.R.layout.simple_expandable_list_item_1, android.R.id.text1, values);
-
-		// Assign adapter to ListView
+		ListView listView = (ListView) findViewById(R.id.listHosts);		
+		HostListAdapter adapter = new HostListAdapter(this, 
+                R.layout.listview_item_row, loadDataFromBin());
+		
+		View header = (View)getLayoutInflater().inflate(R.layout.listview_header_row, null);
+	    
+		listView.addHeaderView(header);
 		listView.setAdapter(adapter);
+		
+		
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
@@ -61,11 +56,10 @@ public class HostsMain extends Activity  {
 			}
 		});
 
-		//loadDataFromBin();
-
 	}
 
-	private void loadDataFromBin() {
+	private HostAccount[] loadDataFromBin() {
+		HostAccount hostAccountReturn[] =  new HostAccount[1];
 		HostAccount b = null;
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
@@ -77,10 +71,13 @@ public class HostsMain extends Activity  {
 			ois = new ObjectInputStream(fis);
 
 			b = (HostAccount) ois.readObject();
+			
+			hostAccountReturn[0] = b;
+			return hostAccountReturn;
 
-			hostsListName.setText(b.getHostName());
-			hostsListAddress.setText(b.getHostIp());
-			hostsListUser.setText(b.getUser());
+//			hostsListName.setText(b.getHostName());
+//			hostsListAddress.setText(b.getHostIp());
+//			hostsListUser.setText(b.getUser());
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -100,6 +97,7 @@ public class HostsMain extends Activity  {
 			} catch (IOException e) {
 			}
 		}
+		return hostAccountReturn;
 
 	}
 

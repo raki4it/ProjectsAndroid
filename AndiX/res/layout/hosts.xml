@@ -1,23 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     tools:context="activity.pack.HostsMain" >
-
-    <TextView
-        android:id="@+id/lblistHosts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:text="@string/hostsList"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
+    
     <ListView
         android:id="@+id/listHosts"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp" >
-
+        android:layout_height="wrap_content">
     </ListView>
 
 </TableLayout>
