@@ -17,7 +17,7 @@ public class HostListAdapter extends ArrayAdapter<HostAccount> {
 	private int resource;
 	private Context context;     
     private HostAccount data[] = null;
-
+    
 	public HostListAdapter(Context context, int textViewResourceId,
 			HostAccount[] objects) {
 		super(context, textViewResourceId, objects);
@@ -25,6 +25,7 @@ public class HostListAdapter extends ArrayAdapter<HostAccount> {
 		this.context = context;
         this.data = objects;
 	}
+
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
