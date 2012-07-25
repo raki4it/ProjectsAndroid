@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.main.R;
@@ -27,7 +28,11 @@ import engine.pack.HostsLoadAndSave;
 public class HostsMain extends Activity {
 	private ListView listView;
 	private Intent intentToMain;
+	@SuppressWarnings("rawtypes")
+	private ArrayAdapter adapterEmpty;
+	private HostListAdapter adapterFill;
 
+	@SuppressWarnings("rawtypes")
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.hosts);
@@ -36,14 +41,19 @@ public class HostsMain extends Activity {
 		intentToMain = new Intent(this, AndiXActivity.class);
 
 		listView = (ListView) findViewById(R.id.listHosts);
-		HostListAdapter adapter = new HostListAdapter(this,
-				R.layout.listview_item_row, hostFiles.loadData());
-
 		View header = (View) getLayoutInflater().inflate(
 				R.layout.listview_header_row, null);
-
 		listView.addHeaderView(header);
-		listView.setAdapter(adapter);
+
+		if (hostFiles.loadData() == null) {
+			adapterEmpty = new ArrayAdapter(this, R.layout.listview_item_row);
+			listView.setAdapter(adapterEmpty);
+		} else {
+
+			adapterFill = new HostListAdapter(this, R.layout.listview_item_row,
+					hostFiles.loadData());
+			listView.setAdapter(adapterFill);
+		}
 
 		listView.setOnItemClickListener(new OnItemClickListener() {
 			@Override
@@ -52,7 +62,7 @@ public class HostsMain extends Activity {
 				if (position != 0) {
 					HostAccount hostToConnect = (HostAccount) listView
 							.getItemAtPosition(position);
-					
+
 					intentToMain.putExtra("hostToConnect", hostToConnect);
 					startActivity(intentToMain);
 				}

@@ -32,7 +32,7 @@ public class HostsLoadAndSave {
 		ObjectInputStream ois = null;
 		
 		try {
-
+			
 			File[] faFiles = localFiles.listFiles();
 			
 			hostAccountReturn = new HostAccount[faFiles.length];
