@@ -6,16 +6,11 @@
     android:orientation="vertical"
     tools:context="activity.pack.AndiXActivity" >
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="15dp"
-        android:layout_weight="0.76" >
+        android:layout_weight="0.73" >
 
         <Button
             android:id="@+id/button2"

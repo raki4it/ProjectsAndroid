@@ -5,26 +5,29 @@
     android:versionName="1.0" >
 
     <uses-sdk android:minSdkVersion="10" />
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> 
-    
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:icon="@drawable/rhythmboxlogo"
         android:label="@string/app_name" >
         <activity android:name="activity.pack.AddHost" />
         <activity android:name="activity.pack.Settings" />
-        <activity android:name="activity.pack.AndiXActivity" />
+        <activity
+            android:name="activity.pack.AndiXActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden" />
+        <!-- dont reCreate activity when orientation is change -->
         <activity
             android:name="activity.pack.HostsMain"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
     </application>
-    
 
 </manifest>

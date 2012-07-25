@@ -2,7 +2,6 @@
 <resources>
 
     <!-- Main Activity -->
-    <string name="hello">Hello World, AndiXActivity!</string>
     <string name="app_name">AndiX</string>
     <string name="button_play">Play</string>
     <string name="button_next">Next</string>
