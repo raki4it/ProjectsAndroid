@@ -9,14 +9,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
 import com.main.R;
 
 import engine.pack.ConnectSSH;
+import engine.pack.HostAccount;
 
 public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 	private ConnectSSH ssh;
 	private SeekBar mSeekBar;
+	HostAccount hostToConnect = null;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -30,21 +33,18 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		NetworkInfo mWifi = connManager
 				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-		//TODO send object
-//		HostAccount hostToConnect = getIntent().getExtras().getParcelable("hostToConnect");
-//		if(hostToConnect!=null)
-//			System.out.println(hostToConnect.getHostName());
-		
-		String message = getIntent().getStringExtra(HostsMain.HOST_NAME);
-		System.out.println(message);
-		
-		if (mWifi.isConnected()) {
+		Bundle bundel = getIntent().getExtras();
+		hostToConnect = (HostAccount) bundel.get("hostToConnect");
+
+		// if (mWifi.isConnected()) {
+		if (true) {
 			new Thread(new Runnable() {
 				public void run() {
-					ssh = new ConnectSSH("192.168.1.88", "winx", 22);
-					System.out.println("Start!");
+					ssh = new ConnectSSH(hostToConnect,22);
+					System.out.println("IN_THREAD");
 					ssh.connect();
-					System.out.println("Watek start!");
+					System.out.println("OUT_THREAD");
+
 				}
 			}).start();
 		} else {

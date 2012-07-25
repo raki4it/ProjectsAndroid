@@ -30,10 +30,11 @@ public class HostsLoadAndSave {
 		HostAccount b = null;
 		FileInputStream fis = null;
 		ObjectInputStream ois = null;
+		
 		try {
 
 			File[] faFiles = localFiles.listFiles();
-
+			
 			hostAccountReturn = new HostAccount[faFiles.length];
 			int i = 0;
 			for (File file : faFiles) {

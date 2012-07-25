@@ -19,6 +19,7 @@ public class ConnectSSH {
 
 	private String Host;
 	private String Username;
+	private String Password;
 	private int Port;
 	private Session session;
 	private Properties config;
@@ -27,10 +28,21 @@ public class ConnectSSH {
 	/**
 	 * 
 	 */
-	public ConnectSSH(String host, String username, int port) {
+	public ConnectSSH(String host, String username, String password, int port) {
 		this.Host = host;
 		this.Port = port;
 		this.Username = username;
+		this.Password = password;
+		this.session = null;
+		this.config = new Properties();
+		this.channel = null;
+	}
+	
+	public ConnectSSH(HostAccount h, int port){
+		this.Host = h.getHostIp();
+		this.Port = port;
+		this.Username = h.getUser();
+		this.Password = h.getPassword();
 		this.session = null;
 		this.config = new Properties();
 		this.channel = null;
@@ -42,7 +54,7 @@ public class ConnectSSH {
 		try{
 		JSch jsch = new JSch();
 		session = jsch.getSession(Username, Host, Port);
-		session.setPassword("");
+		session.setPassword(this.Password);
 		session.setConfig(config);
 		session.connect();
 		}

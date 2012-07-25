@@ -25,7 +25,6 @@ import engine.pack.HostsLoadAndSave;
  */
 
 public class HostsMain extends Activity {
-	public final static String HOST_NAME = "hostToConnect";
 	private ListView listView;
 	private Intent intentToMain;
 
@@ -50,16 +49,13 @@ public class HostsMain extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
-				HostAccount h = (HostAccount) listView
-						.getItemAtPosition(position);
-
-				
-				intentToMain.putExtra(HOST_NAME, h.getHostName());
-				startActivity(intentToMain);
-				// TODO send ssh connetion to main activity in h is all data
-//				intentToMain.putExtra("hostToConnect", h);
-//				Toast.makeText(getApplicationContext(), h.getHostName(),
-//						Toast.LENGTH_LONG).show();
+				if (position != 0) {
+					HostAccount hostToConnect = (HostAccount) listView
+							.getItemAtPosition(position);
+					
+					intentToMain.putExtra("hostToConnect", hostToConnect);
+					startActivity(intentToMain);
+				}
 			}
 		});
 
