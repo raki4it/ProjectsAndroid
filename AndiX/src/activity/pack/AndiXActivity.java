@@ -1,11 +1,15 @@
 package activity.pack;
 
+import javax.xml.datatype.Duration;
+
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.Toast;
 
+import com.jcraft.jsch.JSchException;
 import com.main.R;
 
 import engine.pack.ConnectSSH;
@@ -21,9 +25,10 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		
-		System.out.println("CREATRED!!!");
+		System.out.println("CREATED!!!");
 		mSeekBar = (SeekBar) findViewById(R.id.seekBar1);
 		mSeekBar.setOnSeekBarChangeListener(this);
+	//	mSeekBar.setProgress(progress);
 
 //		ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
 //		NetworkInfo mWifi = connManager
@@ -33,15 +38,20 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		hostToConnect = (HostAccount) bundel.get("hostToConnect");
 
 		// if (mWifi.isConnected()) {
-		new Thread(new Runnable() {
-			public void run() {
+		//new Thread(new Runnable() {
+		//	public void run() {
 				ssh = new ConnectSSH(hostToConnect, 22);
 				System.out.println("IN_THREAD");
-				ssh.connect();
+				try {
+					ssh.connect();
+				} catch (JSchException e) {
+					// TODO Auto-generated catch block
+					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+				}
 				System.out.println("OUT_THREAD");
 
-			}
-		}).start();
+			//}
+		//}).start();
 		// } else {
 		// AlertDialog ad = new AlertDialog.Builder(this).create();
 		// ad.setCancelable(true); // This blocks the 'BACK' button
@@ -57,6 +67,10 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		// }
 
 	}
+	
+//	private int getVolume(){
+//		ssh.runCommand(" env DISPLAY=:0.0 rhythmbox-client --no-start --print-volume");
+//	}
 
 	public void play(View view) {
 		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --play");

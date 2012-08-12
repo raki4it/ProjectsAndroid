@@ -48,20 +48,15 @@ public class ConnectSSH {
 		this.channel = null;
 	}
 
-	public void connect(){
+	public void connect() throws JSchException{
 
 		config.put("StrictHostKeyChecking", "no");
-		try{
 		JSch jsch = new JSch();
 		session = jsch.getSession(Username, Host, Port);
 		session.setPassword(this.Password);
 		session.setConfig(config);
 		session.connect();
-		}
-		catch(JSchException e){
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		
 	}
 
 	public int runCommand(String cmd){
