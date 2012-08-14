@@ -37,8 +37,8 @@ public class ConnectSSH {
 		this.config = new Properties();
 		this.channel = null;
 	}
-	
-	public ConnectSSH(HostAccount h, int port){
+
+	public ConnectSSH(HostAccount h, int port) {
 		this.Host = h.getHostIp();
 		this.Port = port;
 		this.Username = h.getUser();
@@ -48,7 +48,7 @@ public class ConnectSSH {
 		this.channel = null;
 	}
 
-	public void connect() throws JSchException{
+	public void connect() throws JSchException {
 
 		config.put("StrictHostKeyChecking", "no");
 		JSch jsch = new JSch();
@@ -56,22 +56,15 @@ public class ConnectSSH {
 		session.setPassword(this.Password);
 		session.setConfig(config);
 		session.connect();
-		
+
 	}
 
-	public int runCommand(String cmd){
+	public int runCommand(String cmd) throws JSchException {
 
-		try {
-			channel = session.openChannel("exec");
-			((ChannelExec) channel).setCommand(cmd);
-			channel.setInputStream(null);
-			channel.connect();
-
-		} catch (JSchException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		channel = session.openChannel("exec");
+		((ChannelExec) channel).setCommand(cmd);
+		channel.setInputStream(null);
+		channel.connect();
 		return channel.getExitStatus();
 	}
 

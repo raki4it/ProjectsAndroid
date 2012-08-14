@@ -1,7 +1,5 @@
 package activity.pack;
 
-import javax.xml.datatype.Duration;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
@@ -73,27 +71,52 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 //	}
 
 	public void play(View view) {
-		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --play");
+		try {
+			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --play");
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	public void nextSong(View view) {
-		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --next");
+		try {
+			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --next");
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	public void previousSong(View view) {
-		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --previous");
+		try {
+			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --previous");
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	public void pause(View view) {
-		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --pause");
+		try {
+			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --pause");
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
 		double p = (double) progress / 10;
-		ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --set-volume "
-				+ p);
+		try {
+			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --set-volume "
+					+ p);
+		} catch (JSchException e) {
+			// TODO Auto-generated catch block
+			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	@Override
