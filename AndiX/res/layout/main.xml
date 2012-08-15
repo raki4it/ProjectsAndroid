@@ -1,11 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical"
+    android:layout_margin="15dp"
     tools:context="activity.pack.AndiXActivity" >
 
-   
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="23dp"
+        android:layout_marginTop="70dp"
+        android:src="@drawable/on1" android:contentDescription="@string/on"/>
 
-</LinearLayout>
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/imageView1"
+        android:src="@drawable/off1" android:contentDescription="@string/off"/>
+
+    <SeekBar
+        android:id="@+id/seekBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_toLeftOf="@+id/imageView2"
+        android:layout_toRightOf="@+id/imageView1"
+        android:maxHeight="12dip"
+        android:minHeight="10dip"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+    <ImageButton
+        android:id="@+id/imageButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/seekBar1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="62dp"
+        android:onClick="play"
+        android:src="@drawable/play1" 
+        android:contentDescription="@string/button_play"/>
+
+    <ImageButton
+        android:id="@+id/imageButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButton1"
+        android:layout_toRightOf="@+id/imageButton1"
+        android:onClick="nextSong"
+        android:contentDescription="@string/button_next"
+        android:src="@drawable/next1" />
+
+    <ImageButton
+        android:id="@+id/imageButton3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageButton1"
+        android:layout_toLeftOf="@+id/imageButton1"
+        android:onClick="previousSong"
+        android:contentDescription="@string/button_previous"        
+        android:src="@drawable/previous1" />
+
+</RelativeLayout>
