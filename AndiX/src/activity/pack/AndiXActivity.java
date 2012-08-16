@@ -1,7 +1,11 @@
 package activity.pack;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
@@ -16,40 +20,64 @@ import engine.pack.HostAccount;
 public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 	private ConnectSSH ssh;
 	private SeekBar mSeekBar;
+	private ProgressDialog pd;
 	HostAccount hostToConnect = null;
 
+	@SuppressLint("HandlerLeak")
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
-		System.out.println("CREATED!!!");
+
+		final Handler handler = new Handler() {
+			public void handleMessage(final Message msgs) {
+				if (msgs.what == 0) {
+					pd = ProgressDialog.show(AndiXActivity.this, "Working...", "Connecting "+hostToConnect.getHostIp(), true,
+			                false);
+				}
+				if(msgs.what == 9)
+				{
+					pd.dismiss();
+					Toast.makeText(getApplicationContext(), "Connected",
+							Toast.LENGTH_LONG).show();
+					
+				}
+				if (msgs.what == 1) {
+					Toast.makeText(getApplicationContext(), msgs.toString(),
+							Toast.LENGTH_LONG).show();
+				}
+				System.out.println(msgs.what);
+			}
+		};
+
 		mSeekBar = (SeekBar) findViewById(R.id.seekBar1);
 		mSeekBar.setOnSeekBarChangeListener(this);
-	//	mSeekBar.setProgress(progress);
+		// mSeekBar.setProgress(progress);
 
-//		ConnectivityManager connManager = (ConnectivityManager) getSystemService(CONNECTIVITY_SERVICE);
-//		NetworkInfo mWifi = connManager
-//				.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+		// ConnectivityManager connManager = (ConnectivityManager)
+		// getSystemService(CONNECTIVITY_SERVICE);
+		// NetworkInfo mWifi = connManager
+		// .getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
 		Bundle bundel = getIntent().getExtras();
 		hostToConnect = (HostAccount) bundel.get("hostToConnect");
-
+		
 		// if (mWifi.isConnected()) {
-		//new Thread(new Runnable() {
-		//	public void run() {
+		
+		new Thread(new Runnable() {
+			public void run() {
+				handler.sendEmptyMessage(0);
 				ssh = new ConnectSSH(hostToConnect, 22);
-				System.out.println("IN_THREAD");
 				try {
 					ssh.connect();
 				} catch (JSchException e) {
-					// TODO Auto-generated catch block
-					Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+					handler.sendMessage(handler.obtainMessage(1, e.getMessage()));
 				}
-				System.out.println("OUT_THREAD");
+				handler.sendEmptyMessage(9);
+				
+			}
+		}).start();
 
-			//}
-		//}).start();
 		// } else {
 		// AlertDialog ad = new AlertDialog.Builder(this).create();
 		// ad.setCancelable(true); // This blocks the 'BACK' button
@@ -65,17 +93,17 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		// }
 
 	}
-	
-//	private int getVolume(){
-//		ssh.runCommand(" env DISPLAY=:0.0 rhythmbox-client --no-start --print-volume");
-//	}
+
+	// private int getVolume(){
+	// ssh.runCommand(" env DISPLAY=:0.0 rhythmbox-client --no-start --print-volume");
+	// }
 
 	public void play(View view) {
 		try {
 			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --play");
 		} catch (JSchException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -83,8 +111,8 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		try {
 			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --next");
 		} catch (JSchException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -92,8 +120,8 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		try {
 			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --previous");
 		} catch (JSchException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -101,21 +129,22 @@ public class AndiXActivity extends Activity implements OnSeekBarChangeListener {
 		try {
 			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --pause");
 		} catch (JSchException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 
 	@Override
 	public void onProgressChanged(SeekBar seekBar, int progress,
 			boolean fromUser) {
-		double p = (double) progress / 10;
+
 		try {
+			double p = (double) progress / 100;
 			ssh.runCommand("env DISPLAY=:0.0 rhythmbox-client --no-start --set-volume "
 					+ p);
 		} catch (JSchException e) {
-			// TODO Auto-generated catch block
-			Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+			Toast.makeText(getApplicationContext(), e.getMessage(),
+					Toast.LENGTH_LONG).show();
 		}
 	}
 

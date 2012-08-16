@@ -15,7 +15,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="23dp"
         android:layout_marginTop="70dp"
-        android:src="@drawable/on1" android:contentDescription="@string/on"/>
+        android:contentDescription="@string/on"
+        android:src="@drawable/off1" />
 
     <ImageView
         android:id="@+id/imageView2"
@@ -23,7 +24,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/imageView1"
-        android:src="@drawable/off1" android:contentDescription="@string/off"/>
+        android:contentDescription="@string/off"
+        android:src="@drawable/on1" />
 
     <SeekBar
         android:id="@+id/seekBar1"
@@ -32,6 +34,7 @@
         android:layout_alignBottom="@+id/imageView1"
         android:layout_toLeftOf="@+id/imageView2"
         android:layout_toRightOf="@+id/imageView1"
+        android:contentDescription="@string/set_volume"
         android:maxHeight="12dip"
         android:minHeight="10dip"
         android:paddingLeft="10dp"
@@ -43,29 +46,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/seekBar1"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="62dp"
+        android:layout_marginTop="38dp"
+        android:contentDescription="@string/button_play"
         android:onClick="play"
-        android:src="@drawable/play1" 
-        android:contentDescription="@string/button_play"/>
+        android:src="@drawable/play1" />
 
     <ImageButton
         android:id="@+id/imageButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButton1"
+        android:layout_alignTop="@+id/imageButton1"
         android:layout_toRightOf="@+id/imageButton1"
-        android:onClick="nextSong"
         android:contentDescription="@string/button_next"
+        android:onClick="nextSong"
         android:src="@drawable/next1" />
 
     <ImageButton
         android:id="@+id/imageButton3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageButton1"
+        android:layout_alignTop="@+id/imageButton1"
         android:layout_toLeftOf="@+id/imageButton1"
+        android:contentDescription="@string/button_previous"
         android:onClick="previousSong"
-        android:contentDescription="@string/button_previous"        
         android:src="@drawable/previous1" />
 
 </RelativeLayout>
